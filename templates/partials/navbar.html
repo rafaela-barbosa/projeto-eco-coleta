@@ -1,0 +1,17 @@
+
+
+<nav class="navbar">
+    <div class="logo">
+        <a href="{{ url_for('home') }}">
+            <img src="{{ url_for('static', filename='img/logo.png') }}" alt="EcoColeta Logo">
+        </a>
+    </div>
+    
+    <ul class="nav-links">
+        <li><a href="{{ url_for('home') }}">Início</a></li>
+        <li><a href="{{ url_for('como_funciona') }}">Como Funciona</a></li>
+        <li><a href="{{ url_for('materiais') }}">Materiais</a></li>
+        <li><a href="{{ url_for('mapa') }}" class="btn-nav-mapa">Pontos de Coleta</a></li> 
+        <li><a href="{{ url_for('contato') }}">Contato</a></li>
+    </ul>
+</nav>
