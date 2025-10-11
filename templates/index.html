@@ -21,7 +21,7 @@
             <div class="cards-secao">
                 {% for card in secao.get_cards() %}
                     <div class="card">
-                        <i class="fa-light fa-{{ card.get_icone() }}"></i>
+                        <i class="fa-solid fa-{{ card.get_icone() }}"></i>
                         <h3>{{ card.get_titulo() }}</h3>
                         <p>{{ card.get_descricaoCard() }}</p>
                     </div>

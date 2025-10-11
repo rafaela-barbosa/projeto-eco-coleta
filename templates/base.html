@@ -3,21 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/b0507bc725.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{ url_for( 'static', filename= 'css/style.css') }}">
     <title>{% block title %}EcoColeta - Descarte Sustentável{% endblock %}</title> 
 
     {% block head_extras %}{% endblock %}
 </head>
 <body>
-
-    {% include 'partials/navbar.html' %} <!-- faz com que navbar.html seja constante na página base-->
+    <nav class="navbar">
+        {% include 'partials/navbar.html' %} <!-- faz com que navbar.html seja constante na página base-->
+    </nav>
 
     <main id="content">
         {% block content %} <!-- bloco reutilizável. puxa a página index.html e mapa.html-->
             {% endblock %}
     </main>
 
-    {% include 'partials/footer.html' %} <!-- inclui o foote.html de forma constante na página base-->
+    <footer class="site-footer">
+        {% include 'partials/footer.html' %} <!-- inclui o foote.html de forma constante na página base-->
+    </footer>
 
     {% block scripts %}{% endblock %}
 

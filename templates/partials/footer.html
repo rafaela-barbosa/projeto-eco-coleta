@@ -1,0 +1,37 @@
+
+<div class="footer-content">
+    {% for coluna in footerdivs %}
+        <div class="footer-div">
+            <h3>{{ coluna.get_titulo() }}</h3>
+            {% for item in coluna.get_items() %}
+
+                {% if item.item_type == 'LINK' %}
+                    <p><a href="{{ item.get_url() }}">{{ item.get_titulo() }}</a></p>
+                {% elif item.item_type == 'SOCIAL' %}
+                    <a href="{{ item.get_url() }}" target="_blank" class="social-icon">
+                        <i class="fa-brands fa-{{ item.get_icone() }}"></i>
+                    </a>
+                {% elif item.item_type == 'ICONE' %}
+                    {% if item.get_url() %}
+                        <p class="contact-item-text"><a href="{{ item.get_url() }}">
+                            <i class="fa-solid fa-{{ item.get_icone() }}"></i> {{ item.get_titulo() }}
+                        </a></p>
+                    {% else %}
+                        <p class="contact-item-text">
+                            <i class="fa-solid fa-{{ item.get_icone() }}"></i> {{ item.get_titulo() }}
+                        </p>
+                    {% endif %}
+                {% else %}
+                    <p>{{ item.get_titulo() }}</p>
+                {% endif %}
+
+            {% endfor %}
+        </div>
+    {% endfor %}
+
+    <hr class="footer-divider"> 
+    <div class="footer-copyright">
+        <p><small>&copy; 2025 EcoColeta. Todos os direitos reservados.</small></p>
+    </div>
+    
+</div>

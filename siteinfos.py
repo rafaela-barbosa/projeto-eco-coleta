@@ -1,9 +1,9 @@
 class Banner:
-    def __init__(self):
-        self.img = ''
-        self.titulo = ''
-        self.frase = ''
-        self.botao = ''
+    def __init__(self, img,titulo,frase,botao):
+        self.set_img(img)
+        self.set_titulo(titulo)
+        self.set_frase(frase)
+        self.set_botao(botao)
     
     def get_img(self):
         return self.img
@@ -23,12 +23,10 @@ class Banner:
         self.botao = botao
 
 
-
-
 class Secao:
-    def __init__(self):
-        self.h1 = ''
-        self.descricao = ''
+    def __init__(self, h1, descricao):
+        self.set_h1(h1)
+        self.set_descricao(descricao)
         self.cards = []
 
     def get_h1(self):
@@ -45,13 +43,11 @@ class Secao:
         return self.cards
 
 
-
-
 class CardSecao:
-    def __init__(self):
-        self.icone = ''
-        self.titulo = ''
-        self.descricaoCard = ''
+    def __init__(self, icone,titulo,descricaoCard):
+        self.set_icone(icone)
+        self.set_titulo(titulo)
+        self.set_descricaoCard(descricaoCard)
     
     def get_icone(self):
         return self.icone
@@ -65,3 +61,71 @@ class CardSecao:
         return self.descricaoCard
     def set_descricaoCard(self, descricaoCard):
         self.descricaoCard = descricaoCard
+    
+
+class FooterDivs:
+    def __init__(self, titulo):
+        self.set_titulo(titulo)
+        self.items = []
+
+    def set_titulo(self, titulo):
+        self.titulo = titulo
+    def get_titulo(self):
+        return self.titulo
+    def add_items(self, item):
+        self.items.append(item)
+    def get_items(self):
+        return self.items
+
+
+class FooterItem:
+    def __init__(self, titulo,icone=None, url=None):
+        self.set_titulo(titulo)
+        self.set_icone(icone)
+        self.set_url(url)
+    
+    def get_titulo(self):
+        return self.titulo
+    def set_titulo(self, titulo):
+        self.titulo = titulo
+    def get_icone(self):
+        return self.icone
+    def set_icone(self, icone):
+        self.icone = icone
+    def get_url(self):
+        return self.url
+    def set_url(self, url):
+        self.url = url
+
+
+class FooterLinkItem(FooterItem):
+    def __init__(self,titulo,url):
+        super().__init__(titulo, icone = None, url=url)
+        self.item_type = 'LINK'
+    
+    def get_item_type(self):
+        return self.item_type
+    def set_item_type(self, item_type):
+        self.item_type = item_type
+
+
+class FooterIconeItem(FooterItem):
+    def __init__(self, titulo, icone, url = None):
+        super().__init__(titulo, icone, url)
+        self.item_type = 'ICONE'
+
+    def get_item_type(self):
+        return self.item_type
+    def set_item_type(self, item_type):
+        self.item_type = item_type
+    
+
+class FooterSocialItem(FooterItem):
+    def __init__(self, titulo, icone, url):
+        super().__init__(titulo, icone, url)
+        self.item_type = 'SOCIAL'
+
+    def get_item_type(self):
+        return self.item_type
+    def set_item_type(self, item_type):
+        self.item_type = item_type
