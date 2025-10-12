@@ -12,8 +12,8 @@ Inspirado em sites de prefeituras — simples, informativos e práticos — o Ec
 ### ⚙️ Arquitetura e Escolhas Técnicas
 O desenvolvimento do projeto foi planejado com foco em organização, legibilidade e escalabilidade, aplicando boas práticas de arquitetura web e Separação de Responsabilidades (SoC).
 
----
-### 🧩 Estrutura do Projeto
+
+#### 🧩 Estrutura do Projeto
 O diretório foi organizado desde o início para manter clareza e facilidade de manutenção:
 ```bash
 eco-coleta/
@@ -36,8 +36,8 @@ eco-coleta/
 │
 └── .gitignore
 ```
----
-### 🔄 Separação de Responsabilidades
+
+#### 🔄 Separação de Responsabilidades
 
 * `app.py` → Define as rotas e conecta os dados aos templates.
 
@@ -47,8 +47,8 @@ eco-coleta/
 
 Essa abordagem evita a injeção de HTML estático e garante um código mais limpo, modular e de fácil manutenção.
 
----
-### 💻 Tecnologias Utilizadas
+
+#### 💻 Tecnologias Utilizadas
 
 * Python 3.12
 * Flask (microframework web)
