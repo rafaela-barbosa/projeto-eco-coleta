@@ -1,0 +1,27 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+    <header class="banner-simplificado">
+        <div class="banner-content">
+            <h1>{{ secao.get_h1() }}</h1>
+            <p>{{ secao.get_descricao() }}</p>
+        </div>
+    </header>
+
+    <div class="container-secao">
+        <div class="cards-secao cards-passos">
+            {% for card in secao.get_cards() %}
+                <div class="card card-passo">
+                    <i class="fa-solid fa-{{ card.get_icone() }}"></i>
+                    <h3>{{ card.get_titulo() }}</h3>
+                    <p>{{ card.get_descricaoCard() }}</p>
+                </div>
+            {% endfor %}
+        </div>
+        
+        <div class="call-to-action">
+            <a href="{{ url_for('mapa') }}" class="btn-banner">Ver Mapa Agora</a>
+        </div>
+    </div>
+{% endblock content %}

@@ -33,12 +33,15 @@ class Secao:
         return self.h1
     def set_h1(self, h1):
         self.h1 = h1
+
     def get_descricao(self):
         return self.descricao
     def set_descricao(self, descricao):
         self.descricao = descricao
-    def add_cards(self, card):
-        self.cards.append(card)
+
+    def add_cards(self, *cards):     # *args usado para passar mais de um parâmetro
+        for card in cards:
+            self.cards.append(card)
     def get_cards(self):
         return self.cards
 
@@ -56,7 +59,7 @@ class CardSecao:
     def get_titulo(self):
         return self.titulo
     def set_titulo(self, titulo):
-        self.titulo = titulo
+        self.titulo = titulo       
     def get_descricaoCard(self):
         return self.descricaoCard
     def set_descricaoCard(self, descricaoCard):
@@ -72,8 +75,10 @@ class FooterDivs:
         self.titulo = titulo
     def get_titulo(self):
         return self.titulo
-    def add_items(self, item):
-        self.items.append(item)
+    
+    def add_items(self, *itens):
+        for item in itens:
+            self.items.append(item)
     def get_items(self):
         return self.items
 
@@ -129,3 +134,5 @@ class FooterSocialItem(FooterItem):
         return self.item_type
     def set_item_type(self, item_type):
         self.item_type = item_type
+
+
