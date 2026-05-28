@@ -12,7 +12,7 @@
                         <i class="fa-brands fa-{{ item.get_icone }}"></i>
                     </a>
                 {% elif item.item_type == 'ICONE' %}
-                    {% if item.get_url() %}
+                    {% if item.get_url %}
                         <p class="contact-item-text"><a href="{{ item.get_url }}">
                             <i class="fa-solid fa-{{ item.get_icone }}"></i> {{ item.get_titulo }}
                         </a></p>

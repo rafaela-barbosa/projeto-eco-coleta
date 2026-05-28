@@ -3,6 +3,33 @@ from siteinfos import Banner, Secao, CardSecao, FooterDivs, FooterIconeItem, Foo
 
 app = Flask(__name__)
 
+
+
+
+
+
+
+#     --- MIGRANDO PARA core/views.py ---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # --- DADOS PÁGINA HOME ---
 
 banner = Banner( # Padrão de set: icone, titulo, descricao, botao

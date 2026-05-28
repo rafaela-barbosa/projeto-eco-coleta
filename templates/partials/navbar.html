@@ -1,7 +1,8 @@
+{% load static %}
 
 <div class="logo">
-    <a href="{{ url_for('home') }}">
-        <img src="{{ url_for('static', filename='img/icon.png') }}" alt="EcoColeta Logo">
+    <a href="{% url 'home' %}">
+        <img src="{% static 'img/icon.png' %}" alt="EcoColeta Logo">
     </a>
 </div>
 
