@@ -1,7 +1,7 @@
 ## 🌱 EcoColeta: Plataforma de Mapeamento de Pontos de Coleta Seletiva
 ![Status do Projeto](https://img.shields.io/badge/Status-Em%20Construção-orange.svg)
 
-O EcoColeta é uma plataforma web desenvolvida em Python com o framework Flask como parte do Projeto Integrador do curso de Análise e Desenvolvimento de Sistemas.
+O EcoColeta é uma plataforma web desenvolvida em Python como parte do Projeto Integrador do curso de Engenharia de Software / Análise e Desenvolvimento de Sistemas.
 A ideia surgiu a partir de um interesse pessoal em criar algo voltado à sustentabilidade, conectando tecnologia e responsabilidade ambiental.
 
 O objetivo do projeto é centralizar informações sobre coleta seletiva e permitir que os usuários encontrem pontos de coleta próximos por meio de um mapa interativo. Além disso, a plataforma também fornece conteúdos educativos, como um guia de reciclagem, benefícios da coleta seletiva e materiais aceitos.
@@ -9,111 +9,108 @@ O objetivo do projeto é centralizar informações sobre coleta seletiva e permi
 Inspirado em sites de prefeituras — simples, informativos e práticos — o EcoColeta busca ser um ambiente acessível, moderno e funcional, unindo informação e ação.
 
 ---
-### ⚙️ Arquitetura e Escolhas Técnicas
-O desenvolvimento do projeto foi planejado com foco em organização, legibilidade e escalabilidade, aplicando boas práticas de arquitetura web e Separação de Responsabilidades (SoC).
 
+### 🔄 Evolução Arquitetural: De Flask para Django Monólito
 
-#### 🧩 Estrutura do Projeto
-O diretório foi organizado desde o início para manter clareza e facilidade de manutenção:
+Originalmente concebido utilizando o microframework Flask, o projeto passou por uma **refatoração estrutural completa para o framework Django**. 
+
+**Motivação da mudança:** Garantir maior escalabilidade, segurança nativa e preparar a aplicação para a transição de dados mockados para persistência real em banco de dados utilizando o ecossistema robusto do Django ORM e do painel administrativo nativo.
+
+#### 🧩 Nova Estrutura do Projeto (Padrão Django)
+O diretório foi reorganizado seguindo a arquitetura de Apps do Django para manter clareza e facilidade de manutenção:
 ```bash
-eco-coleta/
+projeto-eco-coleta/
 │
-├── app.py                   # Controlador principal (rotas e renderização)
-├── siteinfos.py             # Simulação do banco de dados (mock de dados)
+├── config/                  # Configurações do projeto Django (settings, urls)
 │
-├── /templates               # Templates HTML (Jinja2)
-│   ├── /partials            # Componentes reutilizáveis (navbar, footer)
-│   ├── base.html
-│   ├── index.html
-│   ├── como-funciona.html
-│   ├── mapa.html
-│   ├── contato.html
-│   └── materiais.html
+├── core/                    # App principal da aplicação
+│   ├── siteinfos.py         # Mock temporário de dados (classes dos cards/banners)
+│   ├── views.py             # Lógica de controle e renderização (Contextos)
+│   ├── urls.py              # Rotas específicas do app core
+│   └── templates/           # Templates HTML estruturados para o Django DTL
+│       ├── base.html
+│       ├── index.html
+│       ├── como_funciona.html
+│       ├── mapa.html
+│       ├── contato.html
+│       └── materiais.html
 │
-├── /static                  # Arquivos estáticos
-│   ├── style.css
-│   └── /img
-│
-└── .gitignore
+├── static/                  # Arquivos estáticos globais (CSS, JS, Imagens)
+│   ├── css/
+│   │   └── style.css
+│   └── img/
+
 ```
 
-#### 🔄 Separação de Responsabilidades
+#### 🔄 Separação de Responsabilidades (SoC)
 
-* `app.py` → Define as rotas e conecta os dados aos templates.
-
-* `siteinfos.py` → Armazena classes e dados simulados.
-
-* `Templates (HTML)` → Responsáveis apenas pela estrutura e apresentação, utilizando loops aninhados do Jinja2 ({% for secao in secoes %} / {% for card in secao.get_cards() %}) para gerar o conteúdo dinamicamente.
-
-Essa abordagem evita a injeção de HTML estático e garante um código mais limpo, modular e de fácil manutenção.
-
+* **`core/views.py`** → Gerencia as requisições, injetando os objetos de dados necessários em um dicionário de contexto direcionado aos templates.
+* **`core/siteinfos.py`** → Centraliza as classes estruturais (`Banner`, `Secao`, `CardSecao`, `FooterDivs`) mapeando os dados do ecossistema de forma limpa.
+* **Templates (Django Template Language - DTL)** → Responsáveis estritamente pela camada de apresentação, utilizando tags nativas do Django (`{% for %}`, `{% if %}`, `{% url %}`) de forma rígida e performática, eliminando chamadas diretas de funções do Python no HTML.
 
 #### 💻 Tecnologias Utilizadas
 
 * Python 3.12
-* Flask (microframework web)
-* Jinja2 (templates dinâmicos)
-* HTML5 / CSS3 (estrutura e estilo)
+* Django 6.x (Framework Web Monolítico)
+* Django Template Language (DTL)
+* HTML5 / CSS3 / FontAwesome Icons
 
 ---
-### 🧠 Processo de Desenvolvimento
 
-O projeto foi desenvolvido individualmente, começando com a identificação das funcionalidades essenciais (home page, páginas informativas, mapa e filtros de pesquisa).
-A partir disso, foi criado um design de interface e em seguida, a estrutura de diretórios e templates base do Flask, com partials reutilizáveis (navbar, footer) e herança de templates (base.html).
-
-
-#### Desafios e Aprendizados
-O maior desafio até agora foi aprender e aplicar loops aninhados no Jinja2 para gerar conteúdo dinâmico sem quebrar a separação entre dados e interface. Esse aprendizado veio de muita leitura de documentação e experimentação prática, o que também ajudou a compreender melhor conceitos de arquitetura web.
-
----
 ### 🚧 Próximos Passos (Roadmap)
 
-O projeto está sendo desenvolvido em fases. Os próximos passos incluem:
+O desenvolvimento do EcoColeta está estruturado em fases incrementais, focando na transição de dados controlados para uma aplicação dinâmica real:
 
-1.  Finalizar a estrutura base e a documentação técnica.
-2.  Aplicar o CSS completo, garantindo uma interface moderna e responsiva.
-3.  Desenvolver as páginas secundárias (Mapa e Contato).
-4.  Implementar o mapa interativo, com dados simulados e posterior integração com banco de dados (MySQL).
-5.  Futuramente: Incluir um blog sustentável e funcionalidades de cadastro de usuários.
+####  1. Identidade Visual & Páginas Secundárias (Em Andamento)
+- [ ] **CSS Global & Responsividade:** Implementação de estilização completa e design responsivo, garantindo uma interface moderna e fluida em dispositivos móveis e desktop.
+- [ ] **Página de Contato:** Estruturação e estilização do formulário de atendimento e suporte ao usuário.
+- [ ] **Página do Mapa:** Construção da interface que abrigará o mapa interativo para localização dos pontos de descarte.
+
+####  2. Banco de Dados & Persistência (PostgreSQL)
+- [ ] **Migração para Django Models:** Substituição do arquivo estático de configuração (`siteinfos.py`) por modelos nativos do Django ORM, permitindo o gerenciamento de banners e seções via painel administrativo (`/admin`).
+- [ ] **Integração com PostgreSQL:** Configuração e migração do banco de dados para ambiente PostgreSQL em substituição ao banco de desenvolvimento.
+- [ ] **Modelagem dos Pontos de Coleta:** Criação do modelo `PontoColeta` para armazenamento georreferenciado (Latitude e Longitude), endereços e tipos de materiais recicláveis aceitos.
+- [ ] **API de Geolocalização:** Desenvolvimento de uma API interna que consome dados do PostgreSQL e entrega em formato JSON para renderização dinâmica de marcadores no mapa via JavaScript (Leaflet.js / Google Maps).
+
+####  3. Funcionalidades Futuras
+- [ ] **Autenticação de Usuários:** Sistema de login, cadastro e perfis utilizando o ecossistema nativo de segurança do Django.
+- [ ] **Blog Sustentável:** Espaço dedicado à publicação de artigos, guias de reciclagem e conteúdos educativos sobre sustentabilidade.
 
 ---
+
 ### 🎯 Boas Práticas Aplicadas
 
-* Código limpo e organizado.
-* Nomes claros para funções e variáveis.
-* Separação entre lógica, dados e apresentação (SoC).
-* Estrutura pensada para evolução futura do projeto.
+* **Conventional Commits:** Histórico do Git padronizado (`feat:`, `fix:`, `chore:`, `docs:`).
+* **DRY (Don't Repeat Yourself):** Reutilização de blocos estruturais de dados globais (como o Footer) injetados via contexto nas Views.
+* **Clean Code:** Nomes significativos, funções enxutas e eliminação de código morto/legado do Flask (`app.py`).
 
 ---
+
 ### 🤖 Como Executar o Projeto Localmente
 
-1.  **Clone o Repositório:**
-    ```bash
-    git clone SUA_URL_DO_GITHUB
-    cd projeto-eco-coleta
-    ```
-2.  **Crie e Ative o Ambiente Virtual:**
-    ```bash
-    python -m venv venv
-    .\venv\Scripts\activate   # No Windows PowerShell/CMD
-    ```
-3.  **Instale as Dependências:**
-    ```bash
-    pip install Flask
-    ```
-4.  **Execute a Aplicação:**
-    ```bash
-    flask run
-    ```
-
-O projeto estará acessível em `http://127.0.0.1:5000/`.
-
+1. **Clone o Repositório:**
+   ```bash
+   git clone https://github.com/rafaela-barbosa/projeto-eco-coleta.git
+   cd projeto-eco-coleta
+2. **Crie e Ative o Ambiente Virtual:**
+   ```bash
+   python -m venv venv
+   .\venv\Scripts\activate   # No Windows PowerShell/CMD
+3. **Instale as Dependencias:**
+   ```bash
+   pip install django
+4. **Rode as Migrações Iniciais:**
+   ```bash
+   python manage.py migrate
+5. **Execute a Aplicação:**
+   ```bash
+   python manage.py runserver
+O projeto estará acessível em http://127.0.0.1:8000/.
 
 ---
+
 ### 💬 Reflexão e Aprendizados
 
-O EcoColeta me ensinou que uma boa arquitetura é a base de um projeto sólido.
-Estou aprendendo cada vez mais sobre Flask, Jinja2 e versionamento com Git/GitHub, além de compreender melhor como o planejamento e a estruturação inicial tornam o desenvolvimento mais fluido e organizado.
+A migração de arquitetura do Flask para o Django expandiu drasticamente minha percepção sobre o desenvolvimento web comercial. Lidar com as restrições e o ecossistema do Django exigiu um aprofundamento em ciclos de requisição/resposta, gerenciamento avançado de arquivos estáticos e boas práticas de acoplamento de código.
 
 Se um dia o projeto evoluir além da disciplina, eu gostaria que ele se tornasse uma ferramenta útil de verdade, onde as pessoas pudessem procurar pontos de coleta próximos e até indicar novos locais, ajudando na construção de cidades mais conscientes e sustentáveis. 🌎
-
