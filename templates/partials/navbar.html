@@ -6,9 +6,9 @@
 </div>
 
 <ul class="nav-links">
-    <li><a href="{{ url_for('home') }}">Início</a></li>
-    <li><a href="{{ url_for('como_funciona') }}">Como Funciona</a></li>
-    <li><a href="{{ url_for('materiais') }}">Materiais</a></li>
-    <li><a href="{{ url_for('mapa') }}" class="btn-nav-mapa">Pontos de Coleta</a></li> 
-    <li><a href="{{ url_for('contato') }}">Contato</a></li>
+    <li><a href="{% url 'home' %}">Início</a></li>
+    <li><a href="{% url 'como_funciona' %}">Como Funciona</a></li>
+    <li><a href="{% url 'materiais' %}">Materiais</a></li>
+    <li><a href="{% url 'mapa' %}" class="btn-nav-mapa">Pontos de Coleta</a></li> 
+    <li><a href="{% url 'contato' %}">Contato</a></li>
 </ul>
