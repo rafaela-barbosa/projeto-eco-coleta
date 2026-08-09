@@ -28,17 +28,23 @@ projeto-eco-coleta/
 │   ├── views.py             # Lógica de controle e renderização (Contextos)
 │   ├── urls.py              # Rotas específicas do app core
 │   └── templates/           # Templates HTML estruturados para o Django DTL
+│       └── partials/        # Componentes reutilizáveis
+│           └── footer.html     
+│           └── navbar.html
 │       ├── base.html
 │       ├── index.html
 │       ├── como_funciona.html
 │       ├── mapa.html
 │       ├── contato.html
-│       └── materiais.html
+│       └── materiais.
+
 │
 ├── static/                  # Arquivos estáticos globais (CSS, JS, Imagens)
 │   ├── css/
 │   │   └── style.css
-│   └── img/
+│   └── img/   
+│   └── js/
+│   │   └── mapa.js
 
 ```
 
@@ -62,19 +68,22 @@ projeto-eco-coleta/
 O desenvolvimento do EcoColeta está estruturado em fases incrementais, focando na transição de dados controlados para uma aplicação dinâmica real:
 
 ####  1. Identidade Visual & Páginas Secundárias (Em Andamento)
-- [ ] **CSS Global & Responsividade:** Implementação de estilização completa e design responsivo, garantindo uma interface moderna e fluida em dispositivos móveis e desktop.
-- [ ] **Página de Contato:** Estruturação e estilização do formulário de atendimento e suporte ao usuário.
-- [ ] **Página do Mapa:** Construção da interface que abrigará o mapa interativo para localização dos pontos de descarte.
+- [ X ] **Página de Contato:** Estruturação do formulário de atendimento e suporte ao usuário.
+- [ X ] **Página do Mapa:** Construção da interface que abrigará o mapa interativo para localização dos pontos de descarte.
+- [ ] **CSS Global & Responsividade:** Implementação de estilização e design responsivo, garantindo uma interface moderna e fluida em dispositivos móveis e desktop.
 
-####  2. Banco de Dados & Persistência (PostgreSQL)
-- [ ] **Migração para Django Models:** Substituição do arquivo estático de configuração (`siteinfos.py`) por modelos nativos do Django ORM, permitindo o gerenciamento de banners e seções via painel administrativo (`/admin`).
-- [ ] **Integração com PostgreSQL:** Configuração e migração do banco de dados para ambiente PostgreSQL em substituição ao banco de desenvolvimento.
-- [ ] **Modelagem dos Pontos de Coleta:** Criação do modelo `PontoColeta` para armazenamento georreferenciado (Latitude e Longitude), endereços e tipos de materiais recicláveis aceitos.
-- [ ] **API de Geolocalização:** Desenvolvimento de uma API interna que consome dados do PostgreSQL e entrega em formato JSON para renderização dinâmica de marcadores no mapa via JavaScript (Leaflet.js / Google Maps).
+####  2. Banco de Dados & Persistência
+- [ ] **Migração para Django Models:** Substituição do arquivo estático (`siteinfos.py`) por modelos nativos do Django ORM para gestão no `/admin`.
+- [ ] **Modelagem dos Pontos de Coleta:** Criação do modelo `PontoColeta` para armazenamento georreferenciado (latitude, longitude, endereço e materiais aceitos).
+- [ ] **Migrations & Django Admin:** Execução das migrações (`makemigrations`/`migrate`) e registro dos modelos no `admin.py`.
 
-####  3. Funcionalidades Futuras
-- [ ] **Autenticação de Usuários:** Sistema de login, cadastro e perfis utilizando o ecossistema nativo de segurança do Django.
-- [ ] **Blog Sustentável:** Espaço dedicado à publicação de artigos, guias de reciclagem e conteúdos educativos sobre sustentabilidade.
+####  3. Integração do Mapa Interativo (JavaScript + API)
+- [ ] **Endpoint JSON:** Criação de view interna consultando `PontoColeta.objects.all()` para entregar dados em formato JSON.
+- [ ] **Consumo via JS (Leaflet.js):** Implementação do script `static/js/mapa.js` com `fetch()` para plotagem dinâmica dos marcadores.
+
+####  4. Ambiente de Produção & PostgreSQL
+- [ ] **Integração com PostgreSQL:** Configuração do driver e migração do banco SQLite para PostgreSQL.
+- [ ] **Ajustes para Deploy:** Configuração das variáveis de ambiente em `settings.py` e entrega de arquivos estáticos.
 
 ---
 
@@ -83,6 +92,7 @@ O desenvolvimento do EcoColeta está estruturado em fases incrementais, focando 
 * **Conventional Commits:** Histórico do Git padronizado (`feat:`, `fix:`, `chore:`, `docs:`).
 * **DRY (Don't Repeat Yourself):** Reutilização de blocos estruturais de dados globais (como o Footer) injetados via contexto nas Views.
 * **Clean Code:** Nomes significativos, funções enxutas e eliminação de código morto/legado do Flask (`app.py`).
+* **Acessibilidade (A11y) & HTML Semântico:** Estruturação com tags semânticas (`<ol>`, `<li>`), atributos de acessibilidade (`aria-label`) e rótulos vinculados explicitamente a cada campo (`<label for="...">`).
 
 ---
 
@@ -96,9 +106,10 @@ O desenvolvimento do EcoColeta está estruturado em fases incrementais, focando 
    ```bash
    python -m venv venv
    .\venv\Scripts\activate   # No Windows PowerShell/CMD
+    source venv/bin/activate # No Linux / MacOS
 3. **Instale as Dependencias:**
    ```bash
-   pip install django
+   pip install -r requirements.txt
 4. **Rode as Migrações Iniciais:**
    ```bash
    python manage.py migrate
