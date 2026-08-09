@@ -11,23 +11,25 @@
         </div>
     </header>
 
-    <div class="container-secao">
-        {% for secao in secoes %}
+    <section>
+        <div class="container-secao">
+            {% for secao in secoes %}
             <div class="header-secao">
                 <h2>{{ secao.get_h1 }}</h2>
                 <p>{{ secao.get_descricao }}</p>
             </div>
-
+            
             <div class="cards-secao">
                 {% for card in secao.get_cards %}
-                    <div class="card">
-                        <i class="fa-solid fa-{{ card.get_icone }}"></i>
-                        <h3>{{ card.get_titulo }}</h3>
-                        <p>{{ card.get_descricaoCard }}</p>
-                    </div>
+                <div class="card">
+                    <i class="fa-solid fa-{{ card.get_icone }}"></i>
+                    <h3>{{ card.get_titulo }}</h3>
+                    <p>{{ card.get_descricaoCard }}</p>
+                </div>
                 {% endfor %}
             </div>
-        {% endfor %}
-    </div>
+            {% endfor %}
+        </div>
+    </section>
 
 {% endblock content %}
