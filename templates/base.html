@@ -9,8 +9,12 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <title>{% block title %}EcoColeta - Descarte Sustentável{% endblock %}</title> 
 
-    {% block head_extras %}{% endblock %}
+<!-- Espaço para CSS e Links específicos de cada página. -->
+    {% block head_extras %}
+    
+    {% endblock %}
 </head>
+
 <body>
     <nav class="navbar">
         {% include 'partials/navbar.html' %} <!-- faz com que navbar.html seja constante na página base-->
@@ -18,14 +22,16 @@
 
     <main id="content">
         {% block content %} <!-- bloco reutilizável. puxa a página index.html e mapa.html-->
-            {% endblock %}
+        {% endblock %}
     </main>
 
     <footer class="site-footer">
         {% include 'partials/footer.html' %} <!-- inclui o foote.html de forma constante na página base-->
     </footer>
 
-    {% block scripts %}{% endblock %}
-
+    <!-- Espaço para Scripts específicos de cada página. -->
+    {% block scripts %}
+    
+    {% endblock %}
 </body>
 </html>
