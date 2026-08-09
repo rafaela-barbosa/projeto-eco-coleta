@@ -1,0 +1,48 @@
+
+{% extends 'base.html' %}
+
+{% block title %}
+    EcoColeta - Fale Conosco
+{% endblock %}
+
+{% block content %}
+
+    <section class="container-form">
+        <div class="contato-section">
+            <h1>Fale Conosco</h1>
+
+            {% if sucesso %}
+                <div class="alert-sucesso" role="alert">
+                    Mensagem enviada com sucesso! Em breve entraremos em contato.
+                </div>
+            {% endif %}
+
+            <form action="{% url 'contato' %}" method="post" class="contato-form">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label for="nome" class="form-label">Nome Completo</label>
+                    <input type="text" id="nome" name="nome" class="form-input" required placeholder="Seu nome">
+                </div>
+
+                <div class="form-group">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" id="email" name="email" class="form-input" required placeholder="seu@email.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="assunto" class="form-label">Assunto</label>
+                    <input type="text" id="assunto" name="assunto" class="form-input" required placeholder="Assunto">
+                </div>
+                
+                <div class="form-group">
+                    <label for="mensagem" class="form-label">Mensagem</label>
+                    <textarea name="mensagem" id="mensagem" rows="4" required placeholder="Escreva sua mensagem..."></textarea>
+                </div>
+
+                <button type="submit" class="btn-submit">Enviar Mensagem</button>
+            </form>
+        </div>
+    </section>
+
+{% endblock content %}
