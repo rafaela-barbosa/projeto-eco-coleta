@@ -1,38 +1,65 @@
 {% load static %}
 
-<div class="footer-content">
-    {% for coluna in footerdivs %}
-        <div class="footer-div">
-            <h3>{{ coluna.get_titulo }}</h3>
-            {% for item in coluna.get_items %}
+<footer class="bg-dark-green text-white pt-4 pb-2 border-top">
+    <div class="container">
+        
+        <!-- Grid de Colunas Dinâmicas -->
+        <div class="row g-3">
+            {% for coluna in footerdivs %}
+                <!-- Ajusta o tamanho da coluna dependendo do número de divisões (ex: 3 ou 4 colunas) -->
+                <div class="col-12 col-md-6 col-lg">
+                    <h6 class="fw-bold mb-2 text-white">{{ coluna.get_titulo }}</h6>
+                    
+                    {% for item in coluna.get_items %}
 
-                {% if item.item_type == 'LINK' %}
-                    <p><a href="{{ item.get_url }}">{{ item.get_titulo }}</a></p>
-                {% elif item.item_type == 'SOCIAL' %}
-                    <a href="{{ item.get_url }}" target="_blank" class="social-icon">
-                        <i class="fa-brands fa-{{ item.get_icone }}"></i>
-                    </a>
-                {% elif item.item_type == 'ICONE' %}
-                    {% if item.get_url %}
-                        <p class="contact-item-text"><a href="{{ item.get_url }}">
-                            <i class="fa-solid fa-{{ item.get_icone }}"></i> {{ item.get_titulo }}
-                        </a></p>
-                    {% else %}
-                        <p class="contact-item-text">
-                            <i class="fa-solid fa-{{ item.get_icone }}"></i> {{ item.get_titulo }}
-                        </p>
-                    {% endif %}
-                {% else %}
-                    <p>{{ item.get_titulo }}</p>
-                {% endif %}
+                        {% if item.item_type == 'LINK' %}
+                            <p class="mb-1 small">
+                                <a href="{{ item.get_url }}" class="text-white text-decoration-none hover-white">
+                                    {{ item.get_titulo }}
+                                </a>
+                            </p>
 
+                        {% elif item.item_type == 'SOCIAL' %}
+                            <!-- Mantém ícones de redes sociais lado a lado na mesma linha -->
+                            <div class="d-inline-flex gap-3 me-2 mb-1">
+                                <a href="{{ item.get_url }}" target="_blank" class="text-swhitefs-5 hover-white" title="{{ item.get_titulo }}">
+                                    <i class="fa-brands fa-{{ item.get_icone }}"></i>
+                                </a>
+                            </div>
+
+                        {% elif item.item_type == 'ICONE' %}
+                            {% if item.get_url %}
+                                <p class="mb-1 small">
+                                    <a href="{{ item.get_url }}" class="text-white text-decoration-none hover-white">
+                                        <i class="fa-solid fa-{{ item.get_icone }} me-2 text-success"></i>{{ item.get_titulo }}
+                                    </a>
+                                </p>
+                            {% else %}
+                                <p class="mb-1 small text-white">
+                                    <i class="fa-solid fa-{{ item.get_icone }} me-2 text-success"></i>{{ item.get_titulo }}
+                                </p>
+                            {% endif %}
+
+                        {% else %}
+                            <p class="mb-1 small text-white">{{ item.get_titulo }}</p>
+                        {% endif %}
+
+                    {% endfor %}
+                </div>
             {% endfor %}
         </div>
-    {% endfor %}
 
-    <hr class="footer-divider"> 
-    <div class="footer-copyright">
-        <p><small>&copy; 2025 EcoColeta. Todos os direitos reservados.</small></p>
+        <!-- Divisor de Linha -->
+        <hr class="my-2 border-white opacity-50"> 
+
+        <!-- Direitos Autorais -->
+        <div class="row">
+            <div class="col text-center">
+                <p class="mb-0 text-white small" style="font-size: 0.75rem;">
+                    &copy; 2026 EcoColeta. Todos os direitos reservados.
+                </p>
+            </div>
+        </div>
+
     </div>
-    
-</div>
+</footer>
