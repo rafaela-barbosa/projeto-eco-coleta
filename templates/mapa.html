@@ -5,40 +5,60 @@
     EcoColeta - Encontre Pontos de Coleta 
 {% endblock %}
 
-{% block extra_head %}
-    <!-- 1. CSS do Leaflet.js -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+{% block head_extras %}
+<!-- CSS do Leaflet.js -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 {% endblock %}
 
+{% block navbar %}{% endblock %}
+{% block footer %}{% endblock %}
+
 {% block content %}
-    <section class="mapa-section">
-        <div class="mapa-container">
-            <header class="mapa-header">
-                <h2>Pontos de Coleta</h2>
-                <div class="filtro-options">
-                    <label for="filtro-material">Selecione um tipo de material para filtrar os locais de descarte:</label>
-                    <select class="filtro-material" id="filtro-material" aria-label="Filtros de materiais para descarte">
-                        <option value="todos" selected>Todos os materiais</option>
-                        <option value="plastico">Plástico</option>
-                        <option value="papel">Papel</option>
-                        <option value="vidro">Vidro</option>
-                        <option value="metal">Metal</option>
-                        <option value="eletronico">Eletrônicos</option>
-                        <option value="oleo">Óleo de Cozinha</option>
-                    </select>
-                </div>
-            </header>
+<div class="container-fluid p-0 vh-100 overflow-hidden">
+    <div class="row g-0 h-100">
+        
+        <!-- Menu Lateral (Aside) -->
+        <aside class="col-12 col-md-3 col-lg-2 bg-white d-flex flex-column justify-content-between p-4 border-end sidebar-mapa">
+            
+            <div>
+                <!-- Logo + nome -->
+                <a href="{% url 'home' %}" class="d-flex align-items-center gap-2 text-decoration-none mb-5">
+                    <img id="logo" src="{% static 'img/logo.png' %}" alt="EcoColeta Logo" class="navbar-logo">
+                    <span class="fw-bold fs-5 m-0 text-dark-green">
+                        <span class="text-light-green">Eco</span>Coleta
+                    </span>
+                </a>
 
-            <div id="mapa" aria-label="Mapa interativo com pontos de coleta de recicláveis">
-
+                <!-- Navegação Vertical -->
+                <nav class="d-flex flex-column gap-3 align-items-start">
+                    <a href="{% url 'materiais' %}" class="sidebar-link">Guia de Descarte</a>
+                    <a href="{% url 'como_funciona' %}" class="sidebar-link">Sobre</a>
+                    <a href="{% url 'contato' %}" class="sidebar-link">Contato</a>
+                    <a href="{% url 'mapa' %}" class="sidebar-link active">Mapa</a>
+                </nav>
             </div>
 
-        </div>
-    </section>
+            <!-- Rodapé -->
+            <div class="sidebar-footer">
+                <p class="text-muted small mb-0">
+                    Descarte corretamente.<br>
+                    <em>Projeto baseado na PNRS.</em>
+                </p>
+            </div>
+
+        </aside>
+
+        <section class="col-12 col-md-9 col-lg-10 h-100 position-relative">
+            <main id="mapa" class="w-100 h-100" aria-label="Mapa interativo com pontos de coleta de recicláveis">
+            
+            </main>
+        </section>
+
+    </div>
+</div>
 {% endblock content %}
 
 {% block scripts %}
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
     <script src="{% static 'js/mapa.js' %}"></script>
 {% endblock %}
